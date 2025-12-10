@@ -21,7 +21,7 @@ class SecurePlant:
             self.__height = height
         else:
             print(f"Invalid operation attempted: height {height}cm [REJECTED]")
-            print(f"Security: Negative height rejected for {self.name}\n")
+            print("Security: Negative height rejected\n")
 
     def set_age(self, age):
         if age >= 0:
@@ -35,12 +35,10 @@ if __name__ == "__main__":
     print("=== Garden Security System ===")
     data = [
         ("Rose", 25, 30),
-        ("Carrot", 15, 10),
     ]
     all_plants = [SecurePlant(name, height, age) for name, height, age in data]
     for plant in all_plants:
         plant.set_height(-5)
-        plant.set_age(-5)
         print(
-            f"Current plant: {plant.name}"
+            f"Current plant: {plant.name} "
             f"({plant.get_height()}cm, {plant.get_age()} days)\n")

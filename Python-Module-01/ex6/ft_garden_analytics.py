@@ -130,7 +130,7 @@ if __name__ == "__main__":
         else:
             valid = False
     print(f"\nHeight validation test: {valid}")
-    if (valid == True):
+    if (valid is True):
         print(f"Garden scores - Alice: {scores['Alice']}, "
               f"Bob: {scores['Bob']}")
         print(f"Total gardens managed: {GardenManager.total_gardens()}")

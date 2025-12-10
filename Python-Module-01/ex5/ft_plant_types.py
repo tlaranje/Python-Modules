@@ -53,7 +53,7 @@ if __name__ == "__main__":
     data = [
         ("Flower", "Rose", 25, 30, "red"),
         ("Flower", "Tulip", 25, 1, "yellow"),
-        ("Tree", "Oak", 500, 1875, 50),
+        ("Tree", "Oak", 500, 1825, 50),
         ("Tree", "Pine", 600, 40, 80),
         ("Vegetable", "Tomato", 80, 90, "Summer", "vitamin C"),
         ("Vegetable", "Lettuce", 15, 5, "Spring", "fiber"),

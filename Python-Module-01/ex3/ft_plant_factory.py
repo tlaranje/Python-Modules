@@ -6,17 +6,17 @@ class Plant:
         self.age = age
 
     def print_info(self):
-        print(f"{self.name}: {self.height}cm, {self.age} days old")
+        print(f"Created: {self.name} ({self.height}cm, {self.age} days)")
 
 
 if __name__ == "__main__":
     print("=== Plant Factory Output ===")
     plant_data = [
-        ("Carrot", 30, 10),
-        ("Tomato", 50, 30),
-        ("Lettuce", 10, 5),
-        ("Cucumber", 20, 40),
-        ("Potato", 40, 30),
+        ("Rose", 25, 30),
+        ("Oak", 200, 365),
+        ("Cactus", 5, 90),
+        ("Sunflower", 80, 45),
+        ("Fern", 15, 120),
     ]
     all_plants = [Plant(name, height, age) for name, height, age in plant_data]
     num_plants = 0
