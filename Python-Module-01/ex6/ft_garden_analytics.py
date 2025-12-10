@@ -8,6 +8,15 @@ class GardenManager():
     def add_plant(self, plant):
         self.plants.append(plant)
 
+    def grow_plants(self, grow):
+        print(f"{self.name} is helping all plants grow...")
+        total_grow = 0
+        for p in self.plants:
+            print(f"{p.name} grew {grow}cm")
+            total_grow += 1
+            p.height += grow
+        return total_grow
+
     class GardenStats:
         def __init__(self, garden):
             self.garden = garden
@@ -24,6 +33,10 @@ class GardenManager():
             return counts
 
         def garden_report(self):
+            total_plants = 0
+            total_grow = self.garden.grow_plants(1)
+            print()
+            print(f"=== {self.garden.name}'s Garden Report ===")
             print("Plants in garden:")
             for plant in self.garden.plants:
                 if(plant.plant_type == "Regular"):
@@ -37,7 +50,9 @@ class GardenManager():
                         f"- {plant.name}: {plant.height}cm, "
                         f"{plant.color} flowers (blooming), "
                         f"Prize points: {plant.prize}")
-            print(f"Plants added: , Total growth: ")
+                total_plants += 1
+            print()
+            print(f"Plants added: {total_plants}, Total growth: {total_grow}")
             print(my_garden.stats.count_by_type())
 
 class Plant:
@@ -64,9 +79,9 @@ if __name__ == "__main__":
     print("=== Garden Management System Demo ===")
     my_garden = GardenManager("My Garden")
     data = [
-        ("Regular", "Oak Tree", 500),
+        ("Regular", "Oak Tree", 100),
         ("Flowering", "Rose", 25, "red"),
-        ("Prize", "Sunflower", 51, "yellow", 10),
+        ("Prize", "Sunflower", 50, "yellow", 10),
     ]
     for p in data:
         if (p[0] == "Regular"):
@@ -75,4 +90,6 @@ if __name__ == "__main__":
             my_garden.add_plant(FloweringPlant(p[0], p[1], p[2], p[3]))
         elif (p[0] == "Prize"):
             my_garden.add_plant(PrizeFlower(p[0], p[1], p[2], p[3], p[4]))
+        print(f"Added {p[1]} to {my_garden.name}")
+    print()
     my_garden.stats.garden_report()
