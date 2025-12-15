@@ -5,8 +5,8 @@ if __name__ == "__main__":
     args = len(sys.argv)
 
     if args == 1:
-            print("No scores provided. Usage: python3 ft_score_analytics.py "
-                  "<score1> <score2> ...\n")
+        print("No scores provided. Usage: python3 ft_score_analytics.py "
+              "<score1> <score2> ...\n")
     else:
         try:
             scores_int = [int(arg) for arg in sys.argv[1:]]

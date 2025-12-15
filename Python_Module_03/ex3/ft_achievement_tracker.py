@@ -2,46 +2,61 @@
 class Player:
     def __init__(self, name):
         self.name = name
-        self.achievements = set()
+        self.ach = set()
 
-    def add_achievements(self, new_achievements):
-        self.achievements = self.achievements.union(new_achievements)
+    def add_achievements(self, new_ach):
+        self.ach = self.ach.union(new_ach)
+
+
+def unique_achievements(*players):
+    unique = set.union(*(p.ach for p in players))
+    print(f"All unique achievements: {unique}")
+    print(f"Total unique achievements: {len(unique)}\n")
+
+
+def common_achievements(*players):
+    common = set.intersection(*(p.ach for p in players))
+    print(f"Common to all players: {common}")
+
+
+def rare_achievements(*players):
+    rare_set = set()
+    for player in players:
+        others_union = set.union(*(p.ach for p in players if p != player))
+        rare = player.ach.difference(others_union)
+        rare_set.update(rare)
+    print(f"Rare achievements (1 player): {rare_set}")
+
+
+def alice_bob_common(p1, p2):
+    common = p1.ach.intersection(p2.ach)
+    print(f"\n{p1.name.capitalize()} vs {p2.name.capitalize()} common: "
+          f"{common}")
+    print(f"{p1.name.capitalize()} unique: {p1.ach.difference(common)}")
+    print(f"{p2.name.capitalize()} unique: {p2.ach.difference(common)}")
+
 
 if __name__ == "__main__":
     print("=== Achievement Tracker System ===\n")
     alice = Player("alice")
-    alice_achievements = [
-        "first_kill", "level_10", "treasure_hunter", "speed_demon"
-    ]
-    alice.add_achievements(alice_achievements)
-    print(f"Player {alice.name} achievements: {alice.achievements}")
+    bob = Player("bob")
+    charlie = Player("charlie")
 
+    alice_achs = ["first_kill", "level_10", "treasure_hunter", "speed_demon"]
+    bob_achs = ["first_kill", "level_10", "boss_slayer", "collector"]
+    charlie_achs = ["level_10", "treasure_hunter", "boss_slayer",
+                    "speed_demon", "perfectionist"]
 
+    alice.add_achievements(alice_achs)
+    bob.add_achievements(bob_achs)
+    charlie.add_achievements(charlie_achs)
 
+    print(f"Player {alice.name} achievements: {alice.ach}")
+    print(f"Player {bob.name} achievements: {bob.ach}")
+    print(f"Player {charlie.name} achievements: {charlie.ach}")
 
-
-
-
-
-
-
-"""
-=== Achievement Tracker System ===
-
-Player alice achievements: {'first_kill', 'level_10', 'treasure_hunter', 'speed_demon'}
-Player bob achievements: {'first_kill', 'level_10', 'boss_slayer', 'collector'}
-Player charlie achievements: {'level_10', 'treasure_hunter', 'boss_slayer', 'speed_demon', '
-perfectionist'}
-
-=== Achievement Analytics ===
-All unique achievements: {'boss_slayer', 'collector', 'first_kill', 'level_10', 'perfectionist', '
-speed_demon', 'treasure_hunter'}
-Total unique achievements: 7
-
-Common to all players: {'level_10'}
-Rare achievements (1 player): {'collector', 'perfectionist'}
-
-Alice vs Bob common: {'first_kill', 'level_10'}
-Alice unique: {'speed_demon', 'treasure_hunter'}
-Bob unique: {'boss_slayer', 'collector'}
-"""
+    print("\n=== Achievement Analytics ===")
+    unique_achievements(alice, bob, charlie)
+    common_achievements(alice, bob, charlie)
+    rare_achievements(alice, bob, charlie)
+    alice_bob_common(alice, bob)
