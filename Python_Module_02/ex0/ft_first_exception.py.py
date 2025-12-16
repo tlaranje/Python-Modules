@@ -8,7 +8,7 @@ def check_temperature(temp_str):
         print(f"Error: '{temp_str}' is not a valid number\n")
         return
 
-    if 0 < temp <= 40:
+    if 0 <= temp <= 40:
         print(f"Temperature {temp}°C is perfect for plants!\n")
         return temp
     elif temp > 40:

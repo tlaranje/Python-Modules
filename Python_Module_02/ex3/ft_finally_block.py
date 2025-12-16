@@ -8,7 +8,7 @@ def water_plants(plant_list):
             plant[0]
             print(f"Watering {plant}")
     except Exception:
-        print(f"Cannot water {plant} - invalid plant")
+        print(f"Error: Cannot water {plant} - invalid plant!")
         return
     finally:
         print("Closing watering system (cleanup)")

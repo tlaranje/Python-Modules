@@ -21,33 +21,25 @@ def check_plant_health(plant_name, water_level, sunlight_hours):
 
 def test_plant_checks():
     """Run tests for the check_plant_health function with various inputs."""
-    print("=== Garden Plant Health Checker ===")
+    print("=== Garden Plant Health Checker ===\n")
 
-    print("\nTesting good values...")
-    try:
-        print(check_plant_health("Tomato", 5, 5))
-    except ValueError as e:
-        print(f"Error: {e}")
+    tests = [
+        ("Testing good values...", "tomato", 5, 5),
+        ("Testing empty plant name...", "", 5, 5),
+        ("Testing bad water level...", "tomato", 15, 5),
+        ("Testing bad sunlight hours...", "tomato", 5, 0),
+    ]
 
-    print("\nTesting empty plant name...")
-    try:
-        print(check_plant_health("", 5, 5))
-    except ValueError as e:
-        print(f"Error: {e}")
+    for description, name, water, sun in tests:
+        print(description)
+        try:
+            result = check_plant_health(name, water, sun)
+            print(result)
+        except ValueError as e:
+            print(f"Error: {e}")
+        print()
 
-    print("\nTesting bad water level...")
-    try:
-        print(check_plant_health("Tomato", 15, 5))
-    except ValueError as e:
-        print(f"Error: {e}")
-
-    print("\nTesting bad sunlight hours...")
-    try:
-        print(check_plant_health("Tomato", 5, 0))
-    except ValueError as e:
-        print(f"Error: {e}")
-
-    print("\nAll error raising tests completed!")
+    print("All error raising tests completed!")
 
 
 if __name__ == "__main__":
