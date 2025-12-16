@@ -53,17 +53,14 @@ def fibonacci(n):
 
 
 def primes(n):
-    count = 0
     num = 2
-    while count < n:
-        is_prime = True
+    while n > 0:
         for i in range(2, int(num ** 0.5) + 1):
             if num % i == 0:
-                is_prime = False
                 break
-        if is_prime:
+        else:
             yield num
-            count += 1
+            n -= 1
         num += 1
 
 
@@ -88,8 +85,8 @@ if __name__ == "__main__":
     print("Memory usage: Constant (streaming)")
     print(f"Processing time: {end_time - start_time:.3f} seconds\n")
     print("=== Generator Demonstration ===")
-    print("Fibonacci sequence (first 10):", end=" ")
-    print(", ".join(str(num) for num in fibonacci(10)))
 
-    print("Prime numbers (first 5):", end=" ")
-    print(", ".join(str(p) for p in primes(5)))
+    print("Fibonacci sequence (first 10):",
+          ", ".join(str(num) for num in fibonacci(10)))
+
+    print("Prime numbers (first 5):", ", ".join(str(p) for p in primes(5)))
