@@ -15,7 +15,10 @@ def cal_distance(coords):
 
 def args_coords():
     try:
-        coords = to_tuple(sys.argv[1:4], True)
+        if len(sys.argv) == 1:
+            coords = (10, 20, 5)
+        else:
+            coords = to_tuple(sys.argv[1:4], True)
         print(f"Position created: {coords}")
         cal_distance(coords)
     except ValueError:
@@ -36,22 +39,17 @@ def parse_strings(coord_list):
 
 
 def unpack_demonstration():
-    """Shows tuple unpacking example."""
     coords = (3, 4, 0)
     x, y, z = coords
     print("\nUnpacking demonstration:")
     print(f"Player at x={x}, y={y}, z={z}")
-    print(f"Coordinates: X={x}, Y={y}, Z={z}")
+    print(f"Coordinates: X={x}, Y={y}, Z={z}\n")
 
 
 if __name__ == "__main__":
     print("=== Game Coordinate System ===\n")
 
-    if len(sys.argv) == 1:
-        print("No coordinates provided. Usage: python3 "
-              "ft_coordinate_system.py <x> <y> <z> ...\n")
-    else:
-        args_coords()
+    args_coords()
 
     coord_strings = ["3,4,0", "abc,def,ghi"]
     parse_strings(coord_strings)

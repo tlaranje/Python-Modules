@@ -79,6 +79,7 @@ def inv_analytics(p1, p2):
         print(f"Most items: Tie ({p1_items} items each)")
 
     print("Rarest items:", ", ".join(rarest_items))
+    print()
 
 
 if __name__ == "__main__":

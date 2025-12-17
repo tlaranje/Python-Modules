@@ -15,7 +15,6 @@ def game_event_stream(n, players):
     for i in range(n):
         event = events[i % len(events)]
         player = players[i % len(players)]
-
         yield i + 1, player, event
 
 
@@ -90,3 +89,4 @@ if __name__ == "__main__":
           ", ".join(str(num) for num in fibonacci(10)))
 
     print("Prime numbers (first 5):", ", ".join(str(p) for p in primes(5)))
+    print()

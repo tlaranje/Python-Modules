@@ -20,12 +20,12 @@ def common_achievements(*players):
 
 
 def rare_achievements(*players):
-    rare_set = set()
+    rare = set()
     for player in players:
         others_union = set.union(*(p.ach for p in players if p != player))
         rare = player.ach.difference(others_union)
-        rare_set.update(rare)
-    print(f"Rare achievements (1 player): {rare_set}")
+        rare.update(rare)
+    print(f"Rare achievements (1 player): {rare}")
 
 
 def alice_bob_common(p1, p2):
@@ -33,7 +33,7 @@ def alice_bob_common(p1, p2):
     print(f"\n{p1.name.capitalize()} vs {p2.name.capitalize()} common: "
           f"{common}")
     print(f"{p1.name.capitalize()} unique: {p1.ach.difference(common)}")
-    print(f"{p2.name.capitalize()} unique: {p2.ach.difference(common)}")
+    print(f"{p2.name.capitalize()} unique: {p2.ach.difference(common)}\n")
 
 
 if __name__ == "__main__":
