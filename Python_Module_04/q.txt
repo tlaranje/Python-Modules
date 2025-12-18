@@ -30,3 +30,5 @@ dados.
 
 Ex04 – Ameaças incluem falhas de hardware, vírus e erros humanos. Resposta
 rápida a crises evita perda de dados e mantém o sistema estável.
+
+p ft_stream_management.py > out.txt 2> err.txt

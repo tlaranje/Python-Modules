@@ -11,7 +11,7 @@ if __name__ == "__main__":
         print(fd.read())
 
     print("SECURE PRESERVATION:")
-    with open(filename, "a") as fd:
+    with open(filename, "w") as fd:
         fd.write("{[}CLASSIFIED{]} New security protocols archived\n")
         print("{[}CLASSIFIED{]} New security protocols archived")
 
