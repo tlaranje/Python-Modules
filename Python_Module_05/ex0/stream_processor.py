@@ -139,4 +139,4 @@ if __name__ == "__main__":
         except Exception:
             continue
 
-    print("\nFoundation systems online. Nexus ready for advanced streams")
+    print("\nFoundation systems online. Nexus ready for advanced streams\n")
