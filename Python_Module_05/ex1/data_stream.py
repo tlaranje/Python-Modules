@@ -23,7 +23,7 @@ class SensorStream(DataStream):
         self.total_readings = 0
         self.avg_temp = 0.0
 
-    def filter_data(self, data_batch, criteria: Optional[str] = None):
+    def filter_data(self, data_batch, criteria: Optional[str] = None) -> List[Any]:
         if criteria == "Temp":
             return [d for d in data_batch if 'temp' in d]
         return data_batch
@@ -51,14 +51,26 @@ class SensorStream(DataStream):
             "avg_temp": self.avg_temp
         }
 
-
+""" 
+Initializing Transaction Stream...
+Stream ID: TRANS_001, Type: Financial Data
+Processing transaction batch: [buy:100, sell:150, buy:75]
+Transaction analysis: 3 operations, net flow: +25 units
+ """
 class TransactionStream(DataStream):
     def __init__(self, stream_id):
         self.stream_id = stream_id
+        self.net_flow = 0
+        self.total_operations = 0
+
+    def filter_data(self, data_batch, criteria: Optional[str] = None) -> List[Any]:
+        return [d for d in data_batch if "buy" in d]
 
     def process_batch(self, data_batch: List[Any]) -> str:
-        filter_data = self.filter_data(data_batch, "Trans")
-        print(filter_data)
+        filtered = self.filter_data(data_batch, "Trans")
+        print("Initializing Transaction Stream...")
+        print(f"Stream ID: {self.stream_id}, Type: Financial Data")
+        print(f"Processing transaction batch: {filtered}")
 
 
 class EventStream(DataStream):
@@ -76,14 +88,49 @@ class StreamProcessor():
 if __name__ == "__main__":
     print("=== CODE NEXUS - POLYMORPHIC STREAM SYSTEM ===\n")
 
-    data_batch = [{"temp": 22.5, "humidity": 65, "pressure": 1013},
-                  {"buy":100, "sell":150, "buy":75},
-                  ["login", "error", "logout"]]
+    data_batch = [
+        {"type": "sensor", "temp": 22.5, "humidity": 65, "pressure": 1013},
+        {"type": "transactions", "buy": [100, 75], "sell": [150]}, 
+        {"logs": "logs", "events": ["login", "error", "logout"]}
+    ]
 
     """ Sensor Stream """
     ss = SensorStream("SENSOR_001")
     ss.process_batch(data_batch)
 
     """ Transaction Stream """
-    """ ss = TransactionStream("TRANS_001")
-    ss.process_batch(data_batch) """
+    ss = TransactionStream("TRANS_001")
+    ss.process_batch(data_batch)
+
+
+""" 
+=== CODE NEXUS - POLYMORPHIC STREAM SYSTEM ===
+
+Initializing Sensor Stream...
+Stream ID: SENSOR_001, Type: Environmental Data
+Processing sensor batch: [temp:22.5, humidity:65, pressure:1013]
+Sensor analysis: 3 readings processed, avg temp: 22.5°C
+
+Initializing Transaction Stream...
+Stream ID: TRANS_001, Type: Financial Data
+Processing transaction batch: [buy:100, sell:150, buy:75]
+Transaction analysis: 3 operations, net flow: +25 units
+
+Initializing Event Stream...
+Stream ID: EVENT_001, Type: System Events
+Processing event batch: [login, error, logout]
+Event analysis: 3 events, 1 error detected
+
+=== Polymorphic Stream Processing ===
+Processing mixed stream types through unified interface...
+
+Batch 1 Results:
+- Sensor data: 2 readings processed
+- Transaction data: 4 operations processed
+- Event data: 3 events processed
+
+Stream filtering active: High-priority data only
+Filtered results: 2 critical sensor alerts, 1 large transaction
+
+All streams processed successfully. Nexus throughput optimal.  
+"""
