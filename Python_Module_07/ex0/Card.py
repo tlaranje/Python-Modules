@@ -11,7 +11,13 @@ class CardRarity(Enum):
 
 class CardType(Enum):
     Creature = 1
+    Spell = 2
+    Artifact = 3
 
+class EffectType(Enum):
+    Damage = 1
+    Poison = 2
+    Freeze = 3
 
 class Card(ABC):
     def __init__(self,
@@ -28,9 +34,9 @@ class Card(ABC):
 
     def get_card_info(self) -> dict:
         card_info = {
-            'name': self.name,
-            'cost': self.cost,
-            'rarity': self.rarity.name
+            "name": self.name,
+            "cost": self.cost,
+            "rarity": self.rarity.name,
         }
         return card_info
 

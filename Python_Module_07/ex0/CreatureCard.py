@@ -21,28 +21,27 @@ class CreatureCard(Card):
 
     def get_card_info(self) -> dict:
         card_info = {
-            'name': self.name,
-            'cost': self.cost,
-            'rarity': self.rarity.name,
-            'type': self.type.name,
-            'attack': self.attack,
-            'heallth': self.health
+            "name": self.name,
+            "cost": self.cost,
+            "rarity": self.rarity.name,
+            "type": self.type.name,
+            "attack": self.attack,
+            "heallth": self.health
         }
-
         return card_info
 
     def attack_target(self, target) -> dict:
         attack_res =  {
-            'attacker': self.name,
-            'target': target.name,
-            'damage_dealt': 7,
-            'combat_resolved': True
+            "attacker": self.name,
+            "target": target.name,
+            "damage_dealt": 7,
+            "combat_resolved": True
         }
 
-        if target.health <= attack_res['damage_dealt']:
-            attack_res['combat_resolved'] = True
+        if target.health <= attack_res["damage_dealt"]:
+            attack_res["combat_resolved"] = True
         else:
-            attack_res['combat_resolved'] = False
+            attack_res["combat_resolved"] = False
 
         return attack_res
 
