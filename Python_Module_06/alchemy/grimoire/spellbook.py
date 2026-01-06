@@ -6,4 +6,4 @@ def record_spell(spell_name: str, ingredients: str) -> str:
     if is_valid.split("-")[1].strip() == "VALID":
         return f"Spell recorded: {spell_name} ({is_valid})"
     else:
-        return f"Spell recorded: {spell_name} ({is_valid})"
+        return f"Spell rejected: {spell_name} ({is_valid})"

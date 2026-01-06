@@ -4,6 +4,7 @@ from alchemy.elements import create_fire, create_earth
 from alchemy.potions import healing_potion as heal
 from alchemy.potions import strength_potion
 
+
 if __name__ == "__main__":
     print("=== Import Transmutation Mastery ===\n")
     print("Method 1 - Full module import:")

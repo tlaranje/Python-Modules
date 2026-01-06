@@ -1,16 +1,23 @@
 import alchemy
 import alchemy.elements
 
+
 if __name__ == "__main__":
     print("=== Sacred Scroll Mastery ===\n")
 
     print("Testing direct module access:")
-    print(f"alchemy.elements.create_fire(): {alchemy.elements.create_fire()}")
+
+    print("alchemy.elements.create_fire(): "
+          f"{alchemy.elements.create_fire()}")
+
     print("alchemy.elements.create_water(): "
           f"{alchemy.elements.create_water()}")
+
     print("alchemy.elements.create_earth(): "
           f"{alchemy.elements.create_earth()}")
-    print(f"alchemy.elements.create_air(): {alchemy.elements.create_air()}\n")
+
+    print("alchemy.elements.create_air(): "
+          f"{alchemy.elements.create_air()}\n")
 
     print("Testing package-level access (controlled by __init__.py):")
 
