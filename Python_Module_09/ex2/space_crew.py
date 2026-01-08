@@ -27,3 +27,4 @@ class SpaceMission(BaseModel):
     duration_days: int = Field(..., ge=1, le=3650)
     crew: list = Field(..., min_length=1, max_length=12)
     mission_status: str = "planned"
+    budget_millions: float = Field(..., ge=1.0, le=10000.0)
