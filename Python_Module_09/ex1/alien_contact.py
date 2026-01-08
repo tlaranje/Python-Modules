@@ -1,6 +1,7 @@
 from pydantic import BaseModel, Field, ValidationError, model_validator
 from datetime import datetime
 from typing import Optional
+from typing_extensions import Self
 from enum import Enum
 
 
@@ -22,32 +23,54 @@ class AlienContact(BaseModel):
     message_received: Optional[str] = Field(None, max_length=500)
     is_verified: bool = False
 
+    @model_validator(mode='after')
+    def check_business_rules(self) -> Self:
+        if not self.contact_id.startswith("AC"):
+            raise ValueError("Contact ID must start with 'AC'")
+
+        if self.contact_type == ContactType.physical:
+            if self.is_verified is not True:
+                raise ValueError("Physical contact reports must be verified")
+
+        if self.contact_type == ContactType.telepathic:
+            if self.witness_count is None or self.witness_count < 3:
+                raise ValueError(
+                    "Telepathic contact requires at least 3 witnesses")
+
+        if self.signal_strength > 7.0:
+            if not self.message_received:
+                raise ValueError("Strong signals (> 7.0) must include a "
+                                    "received message" )
+        return self
+
 
 def print_info(s: AlienContact) -> None:
-    print(f"ID: {s.station_id}")
-    print(f"Name: {s.name}")
-    print(f"Crew: {s.crew_size}")
-    print(f"Power: {s.power_level}%")
-    print(f"Oxygen: {s.oxygen_level}%")
-    print("Status: "
-          f"{'Operational' if s.is_operational else 'Not Operational'}\n")
+    print(f"ID: {s.contact_id}")
+    print(f"Type: {s.contact_type.name}")
+    print(f"Location: {s.location}")
+    print(f"Signal: {s.signal_strength}/10")
+    print(f"Duration: {s.duration_minutes} minutes")
+    print(f"Witnesses: {s.witness_count}")
+    print(f"Message: '{s.message_received}'\n")
 
 
 def main() -> None:
-    print("Space Station Data Validation")
+    print("Alien Contact Log Validation")
     print("========================================")
 
     try:
         station = AlienContact(
-            station_id="ISS001",
-            name="International Space Station",
-            crew_size=6,
-            power_level=85.5,
-            oxygen_level=92.3,
-            last_maintenance=datetime.now(),
-            is_operational=True)
+            contact_id="AC_2024_001",
+            timestamp=datetime.now(),
+            location="Area 51, Nevada",
+            contact_type=ContactType.radio,
+            signal_strength=8.5,
+            duration_minutes=45,
+            witness_count=5,
+            message_received="Greetings from Zeta Reticuli",
+            is_verified=True)
 
-        print("Valid Station Created:")
+        print("Valid contact report:")
         print_info(station)
     except ValidationError as e:
         print("Expected validation error:")
@@ -56,14 +79,15 @@ def main() -> None:
     print("========================================")
     try:
         AlienContact(
-            station_id="BAD01",
-            name="Broken Station",
-            crew_size=50,
-            power_level=50.0,
-            oxygen_level=50.0,
-            last_maintenance=datetime.now(),
-            is_operational=True)
-
+            contact_id="AC_2024_001",
+            timestamp=datetime.now(),
+            location="Area 51, Nevada",
+            contact_type=ContactType.telepathic,
+            signal_strength=8.5,
+            duration_minutes=45,
+            witness_count=1,
+            message_received="Greetings from Zeta Reticuli",
+            is_verified=True)
     except ValidationError as e:
         print("Expected validation error:")
         print(e.errors()[0]['msg'])

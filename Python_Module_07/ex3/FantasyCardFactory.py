@@ -40,16 +40,16 @@ class FantasyCardFactory(CardFactory):
         self.deck.add_card(card)
 
     def create_themed_deck(self, size: int) -> dict:
-        deck_info = { "creatures": 0, "spells": 0, "artifacts": 0 }
+        deck_info = {"creatures": 0, "spells": 0, "artifacts": 0}
         creators = [
             self.create_creature,
             self.create_spell,
-            self.create_artifact ]
+            self.create_artifact]
 
         for _ in range(size):
             creator = random.choice(creators)
             creator(f"Card{random.randint(1, 10)}")
-            
+
             if creator == self.create_creature:
                 deck_info["creatures"] += 1
             elif creator == self.create_spell:

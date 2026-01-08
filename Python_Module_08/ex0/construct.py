@@ -2,7 +2,7 @@ import sys
 import os
 
 
-# This program checks whether it is running inside a Python virtual environment.
+# This program checks whether it is running inside a virtual environment.
 
 if __name__ == "__main__":
     try:
@@ -31,7 +31,7 @@ if __name__ == "__main__":
             python_version = (f"python{sys.version_info.major}."
                               f"{sys.version_info.minor}")
 
-            # Path to the site-packages directory inside the virtual environment
+            # Path to the site-packages directory
             virtual_site_packages = os.path.join(
                 sys.prefix, "lib", python_version, "site-packages"
             )
