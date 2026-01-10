@@ -1,15 +1,48 @@
 
+def fireball(damage: int) -> int:
+    return damage
+
+
+def heal(healing: int) -> int:
+    return healing
+
+
+def check_power(power: int) -> bool:
+    return power > 5
+
+
 def spell_combiner(spell1: callable, spell2: callable) -> callable:
-    pass
+    return lambda *x: (spell1(*x), spell2(*x))
 
 
 def power_amplifier(base_spell: callable, multiplier: int) -> callable:
-    pass
+    return lambda *x: base_spell(*x) * multiplier
 
 
 def conditional_caster(condition: callable, spell: callable) -> callable:
-    pass
+    return lambda *x: spell(*x) if condition(*x) else "Spell fizzled"
 
 
 def spell_sequence(spells: list[callable]) -> callable:
-    pass
+    return lambda *x: [spell(*x) for spell in spells]
+
+
+if __name__ == "__main__":
+    damage = 10
+
+    combiner = spell_combiner(fireball, heal)
+    print("Testing spell_combiner:")
+    print(f"Combined spell result: {combiner(damage)}\n")
+
+    amplifier = power_amplifier(fireball, 2)
+    print("Testing power_amplifier:")
+    print(f"Original: {damage}, Amplified: {amplifier(damage)}\n")
+
+    caster = conditional_caster(check_power, fireball)
+    print("Testing conditional_caster:")
+    print(f"{caster(damage)}\n")
+
+    spells = [fireball, heal]
+    sequence = spell_sequence(spells)
+    print("Testing spell_sequence:")
+    print(f"{sequence(damage)}")
