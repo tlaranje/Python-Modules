@@ -1,7 +1,6 @@
-
-
 def mage_counter() -> callable:
     count = 0
+
     def counter() -> int:
         nonlocal count
         count += 1
@@ -11,6 +10,7 @@ def mage_counter() -> callable:
 
 def spell_accumulator(initial_power: int) -> callable:
     total_power = initial_power
+
     def add(x: int) -> int:
         nonlocal total_power
         total_power += x
@@ -48,7 +48,7 @@ if __name__ == "__main__":
     print("\nTesting enchantment factory...")
     ench_types = ['Frozen', 'Flaming', 'Flowing']
     items = ['Cloak', 'Sword', 'Staff', 'Ring']
-    for  ench, item in zip(ench_types, items):
+    for ench, item in zip(ench_types, items):
         factory = enchantment_factory(ench)
         print(f"{factory(item)}")
 
