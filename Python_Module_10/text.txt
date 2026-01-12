@@ -21,7 +21,7 @@
     foi criada.
 
     Lexical scoping traz benefícios como encapsulamento, ausência de variáveis
-     globais e comportamento previsível.
+    globais e comportamento previsível.
 
 🔹 reduce e memoization
 
