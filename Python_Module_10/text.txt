@@ -1,0 +1,41 @@
+🔹 Lambda expressions
+
+    Tornam o código mais conciso porque permitem criar funções pequenas em uma
+    única linha.
+
+    Usa lambda para funções simples e descartáveis; usa def quando a função é
+    complexa, reutilizável ou precisa de nome.
+
+🔹 Higher‑order functions e funções de primeira classe
+
+    Higher‑order functions permitem passar funções como argumentos e
+    retorná‑las, facilitando reuso e composição.
+
+    Funções são first‑class citizens porque podem ser armazenadas em variáveis,
+    passadas, retornadas e colocadas em estruturas de dados como qualquer outro
+    valor.
+
+🔹 Closures e lexical scoping
+
+    Closures permitem que uma função interna “lembre” variáveis do escopo onde
+    foi criada.
+
+    Lexical scoping traz benefícios como encapsulamento, ausência de variáveis
+     globais e comportamento previsível.
+
+🔹 reduce e memoization
+
+    functools.reduce permite agregar uma coleção inteira num único valor
+    aplicando uma função acumuladora.
+
+    lru_cache melhora o desempenho ao guardar resultados já calculados,
+    evitando recomputações caras.
+
+🔹 Decorators e métodos estáticos
+
+    Decorators separam responsabilidades ao adicionar comportamento extra
+    sem modificar a função original.
+
+    @staticmethod não recebe self e não depende do estado do objeto;
+    métodos normais recebem self e usam dados da instância.
+
